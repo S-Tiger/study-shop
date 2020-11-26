@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorator="layout/default">
+
+<th:block layout:fragment="content">
+
+    <h1 class="page-header">게시글</h1>
+    <div>
+        <table>
+            <tr>
+                <td>번호:</td> <td th:text="${posts.no}"></td>
+            </tr>
+            <tr>
+                <td>제목:</td> <td th:text="${posts.title}"></td>
+            </tr>
+            <tr>
+                <td>내용:</td> <td th:text="${posts.content}"></td>
+            </tr>
+        </table>
+        <a th:href="@{/posts/{id}/update(id = ${posts.no})}" role="button" class="btn btn-primary">글 수정</a>
+    </div>
+
+</th:block>
+</body>
+</html>
