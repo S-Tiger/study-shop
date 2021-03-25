@@ -1,10 +1,8 @@
 package study.shop.controller;
 
-import com.sun.deploy.net.HttpResponse;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
-import org.springframework.http.HttpRequest;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -30,4 +28,11 @@ public class MemberController {
     public String join(){
         return "/member/save";
     }
+
+    @GetMapping(value = "/login")
+    public String login(){
+        return "/member/login";
+    }
+
+
 }

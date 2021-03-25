@@ -16,14 +16,14 @@ import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor //final이 선언된 Class를 주입
-public class MemberService {
+public class MemberService /*implements UserDetailsService*/ {
 
     private final MemberRepository memberRepo;
 
     @Transactional
-    public MemberResDTO save(MemberReqDTO reqDTO){
+    public void save(MemberReqDTO reqDTO){
         memberRepo.findByLoginId(reqDTO.getLoginId()).ifPresent(m -> {throw new IllegalStateException("이미 존재하는 회원입니다."); });
-        return new MemberResDTO(memberRepo.save(reqDTO.toEntity()));
+        memberRepo.save(reqDTO.toEntity());
     }
 
     public MemberResDTO get(Long id){
@@ -53,4 +53,12 @@ public class MemberService {
         memberRepo.delete(member);
     }
 
+//    @Override
+//    public UserDetails loadUserByUsername(String loginId) throws UsernameNotFoundException {
+//        Member member = memberRepo.findByLoginId(loginId).get();
+//
+//        List<GrantedAuthority> authorities = new ArrayList<>();
+//
+//        return new User(member.getL)
+//    }
 }

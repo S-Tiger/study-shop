@@ -25,8 +25,15 @@ public class MemberApiController {
 
     @ApiOperation(value = "회원 등록", notes = "회원을 등록 합니다.")
     @PostMapping("/member")
-    public MemberResDTO save(HttpServletResponse res, HttpServletRequest req, @RequestBody MemberReqDTO reqDTO){
-        return memberService.save(reqDTO);
+    public int save(HttpServletResponse res, HttpServletRequest req, @RequestBody MemberReqDTO reqDTO){
+        int result;
+        try {
+            memberService.save(reqDTO);
+            result = 1;
+        }catch (IllegalStateException e){
+            result = 0;
+        }
+        return result;
     }
 
     @ApiOperation(value = "회원 조회", notes = "회원을 조회 합니다.")

@@ -47,7 +47,7 @@ public class MemberReqDTO {
                 .password(password)
                 .age(age)
                 .sex(sex)
-                .role(Role.GUEST)
+                .role(Role.MEMBER)
                 .build();
     }
 }

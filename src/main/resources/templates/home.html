@@ -1,16 +1,17 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org"
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      xmlns:sec="http://www.w3.org/1999/xhtml"
       layout:decorator="layout/default">
 
 <th:block layout:fragment="content">
 
     <h1 class="page-header">Hello Spring</h1>
     <p>회원 기능</p>
-    <p>
-        <a href="/member/save">회원 가입</a>
-        <a href="/member/list">회원 목록</a>
-    </p>
+        <a sec:authorzize = "isAnonymous()" th:href="@{/member/login}">로그인</a>
+        <a sec:authorzize = "isAuthenticated()" th:href="@{/member/logout}">로그아웃</a>
+        <a sec:authorzize = "isAnonymous()" href="/member/save">회원 가입</a>
+        <a sec:authorzize = "hasRole('ROLE_MEMBER')" href="/member/list">회원 목록</a>
 
 </th:block>
 </html>

@@ -14,6 +14,7 @@ import study.shop.repository.MemberRepository;
 import study.shop.repository.PostsRepository;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
@@ -25,8 +26,9 @@ public class PostsService {
 
     @Transactional
     public PostsResDTO save(PostsReqDTO reqDTO){
-        Member member = memberRepo.findByLoginId(reqDTO.getAuthor()).orElseThrow(() -> new IllegalArgumentException("해당 데이터가 존재하지 않습니다."));
-        return new PostsResDTO(postsRepo.save(reqDTO.toEntity(member)));
+        Optional<Member> member = memberRepo.findByLoginId(reqDTO.getAuthor());
+
+        return new PostsResDTO(postsRepo.save(reqDTO.toEntity(member.get())));
     }
 
     public PostsResDTO get(Long id){
