@@ -13,9 +13,9 @@ import javax.validation.constraints.Pattern;
 @AllArgsConstructor //모든 변수 생성자
 public class MemberReqDTO {
 
-    @ApiModelProperty(value = "로그인ID", required = true)
+    @ApiModelProperty(value = "회원ID", required = true)
     @NotBlank(message = "아이디는 필수 입력 값입니다.")
-    private String loginId;
+    private String memberId;
     //@NotBlank : null과 빈 공백 문자열 (" ")을 허용하지 않음
     //@NotEmpty : null과 공백 문자열("")을 허용하지 않음
 
@@ -42,7 +42,7 @@ public class MemberReqDTO {
 
     public Member toEntity(){
         return  Member.builder()
-                .loginId(loginId)
+                .id(memberId)
                 .nickName(nickName)
                 .password(password)
                 .age(age)

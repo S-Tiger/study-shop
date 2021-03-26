@@ -21,12 +21,8 @@ import java.util.List;
 public class Member extends BaseEntity {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "MEMBER_ID")
-    private Long id;
-
-    @Column(length = 30, nullable = false)
-    private String loginId;
+    @Column(name = "MEMBER_ID", length = 30, nullable = false)
+    private String id;
 
     @Column(nullable = false)
     private String password;

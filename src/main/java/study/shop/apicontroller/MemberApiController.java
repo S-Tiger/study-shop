@@ -26,8 +26,10 @@ public class MemberApiController {
     @ApiOperation(value = "회원 등록", notes = "회원을 등록 합니다.")
     @PostMapping("/member")
     public int save(HttpServletResponse res, HttpServletRequest req, @RequestBody MemberReqDTO reqDTO){
+        System.out.println("포인트1");
         int result;
         try {
+            System.out.println("포인트2");
             memberService.save(reqDTO);
             result = 1;
         }catch (IllegalStateException e){
@@ -37,9 +39,9 @@ public class MemberApiController {
     }
 
     @ApiOperation(value = "회원 조회", notes = "회원을 조회 합니다.")
-    @GetMapping("/member/{id}")
-    public MemberResDTO get(HttpServletResponse res, HttpServletRequest req, @PathVariable Long id){
-        return memberService.get(id);
+    @GetMapping("/member/{memberId}")
+    public MemberResDTO get(HttpServletResponse res, HttpServletRequest req, @PathVariable String memberId){
+        return memberService.get(memberId);
     }
 
     @ApiOperation(value = "회원 목록", notes = "회원을 목록을 조회 합니다.")
@@ -54,14 +56,14 @@ public class MemberApiController {
     }
 
     @ApiOperation(value = "회원 수정", notes = "회원을 수정 합니다.")
-    @PutMapping("/member/{id}")
-    public MemberResDTO delete(HttpServletResponse res, HttpServletRequest req, @PathVariable Long id, MemberReqDTO reqDTO){
-        return memberService.update(id, reqDTO);
+    @PutMapping("/member/{memberId}")
+    public MemberResDTO delete(HttpServletResponse res, HttpServletRequest req, @PathVariable String memberId, MemberReqDTO reqDTO){
+        return memberService.update(memberId, reqDTO);
     }
 
     @ApiOperation(value = "회원 삭제", notes = "회원을 삭제 합니다.")
-    @DeleteMapping("/member/{id}")
-    public void delete(HttpServletResponse res, HttpServletRequest req, @PathVariable Long id){
-        memberService.delete(id);
+    @DeleteMapping("/member/{memberId}")
+    public void delete(HttpServletResponse res, HttpServletRequest req, @PathVariable String memberId){
+        memberService.delete(memberId);
     }
 }

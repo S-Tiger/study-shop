@@ -3,11 +3,14 @@ package study.shop.domain.posts;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import study.shop.domain.member.Member;
+import study.shop.domain.postsfile.PostsFileResDTO;
+
+import java.util.List;
+import java.util.stream.Collectors;
 
 @Data
-@NoArgsConstructor //기본 생성자
-@AllArgsConstructor //모든 변수 생성자
+@NoArgsConstructor
+@AllArgsConstructor
 public class PostsResDTO {
 
     private Long no;
@@ -20,11 +23,17 @@ public class PostsResDTO {
 
     private String createDate;
 
+    private Long postsViews;
+
+    private List<PostsFileResDTO> postsFileList;
+
     public PostsResDTO(Posts posts){
         this.no = posts.getId();
         this.title = posts.getTitle();
         this.content = posts.getContent();
         this.author = posts.getMember().getNickName();
         this.createDate = posts.getCreateDate().substring(0, posts.getCreateDate().indexOf("T"));
+        this.postsViews = posts.getPostsViews();
+        this.postsFileList = posts.getPostsFileList().stream().map(o -> new PostsFileResDTO(o)).collect(Collectors.toList());
     }
 }

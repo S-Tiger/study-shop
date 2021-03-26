@@ -7,8 +7,8 @@ import lombok.NoArgsConstructor;
 import study.shop.domain.member.Member;
 
 @Data
-@NoArgsConstructor //기본 생성자
-@AllArgsConstructor //모든 변수 생성자
+@NoArgsConstructor
+@AllArgsConstructor
 public class PostsReqDTO {
 
     @ApiModelProperty(value = "제목", required = true)

@@ -9,7 +9,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor //모든 변수 생성자
 public class MemberResDTO {
 
-    private String loginId;
+    private String memberId;
 
     private String password;
 
@@ -22,7 +22,7 @@ public class MemberResDTO {
     private String authority;
 
     public MemberResDTO(Member member){
-        this.loginId = member.getLoginId();
+        this.memberId = member.getId();
         this.password = member.getPassword();
         this.nickName = member.getNickName();
         this.age = member.getAge();
