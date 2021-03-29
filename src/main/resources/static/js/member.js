@@ -2,13 +2,13 @@ var main = {
     init : function () {
         var _this = this;
         $('#btn-save').on('click', function () {
-            var loginId = $('#loginId').val();
+            var memberId = $('#memberId').val();
             var password = $('#password').val();
             var idExp = /^(?=.*[A-Za-z0-9])(?=.*[A-za-z]).{4,12}$/;
             var passExp = /^(?=.*[a-zA-Z])((?=.*[0-9])|(?=.*\W)).{6,20}$/;
-            if(!idExp.test(loginId)){
+            if(!idExp.test(memberId)){
                 alert("아이디는 영어와 숫자로 이루어진 4~12자만 가능합니다.");
-                $("#loginId").focus();
+                $("#memberId").focus();
                 return;
             }else if(!passExp.test(password)){
                 alert("비밀번호는 최소 1개의 숫자 혹은 특수 문자를 포함한 6~20 글자여야 합니다.");
@@ -29,7 +29,7 @@ var main = {
 
     save : function () {
         var data = {
-            loginId: $('#loginId').val(),
+            memberId: $('#memberId').val(),
             password: $('#password').val(),
             nickName: $('#nickName').val(),
             age: $('#age').val(),

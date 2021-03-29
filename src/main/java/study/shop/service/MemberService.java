@@ -16,6 +16,7 @@ import org.springframework.transaction.annotation.Transactional;
 import study.shop.domain.member.Member;
 import study.shop.domain.member.MemberReqDTO;
 import study.shop.domain.member.MemberResDTO;
+import study.shop.domain.member.SecurityMemberVO;
 import study.shop.repository.MemberRepository;
 
 import java.util.ArrayList;
@@ -35,7 +36,6 @@ public class MemberService implements UserDetailsService {
     @Transactional
     public void save(MemberReqDTO reqDTO){
         memberRepo.findById(reqDTO.getMemberId()).ifPresent(m -> {throw new IllegalStateException("이미 존재하는 회원입니다."); });
-        System.out.println("여기까지 오긴 하나요");
         BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
         reqDTO.setPassword(passwordEncoder.encode(reqDTO.getPassword()));
         memberRepo.save(reqDTO.toEntity());
@@ -91,10 +91,11 @@ public class MemberService implements UserDetailsService {
     @Override
     public UserDetails loadUserByUsername(String memberId) throws UsernameNotFoundException {
         Member member = memberRepo.findById(memberId).get();
-
+        SecurityMemberVO memberVo = new SecurityMemberVO(member);
         List<GrantedAuthority> authorities = new ArrayList<>();
+        System.out.println("여기냐?~test"+ member.getRoleValue());
 
         authorities.add(new SimpleGrantedAuthority(member.getRoleValue()));
-        return new User(member.getId(), member.getPassword(), authorities);
+        return new User(memberVo.getUsername(), memberVo.getPassword(), authorities);
     }
 }

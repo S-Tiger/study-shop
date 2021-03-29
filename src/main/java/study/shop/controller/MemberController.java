@@ -6,9 +6,12 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import study.shop.domain.member.MemberResDTO;
 import study.shop.service.MemberService;
+
+import javax.servlet.http.HttpServletRequest;
 
 @RequiredArgsConstructor
 @Controller
@@ -30,8 +33,14 @@ public class MemberController {
     }
 
     @GetMapping(value = "/login")
-    public String login(){
+    public String getLogin(){
         return "/member/login";
+    }
+
+    @PostMapping(value = "/login")
+    public String postLogin(HttpServletRequest request, Model model){
+        return null;
+
     }
 
 
