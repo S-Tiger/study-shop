@@ -11,7 +11,7 @@ spring:
 
   #H2
   datasource:
-    url: jdbc:h2:tcp://localhost/~/stuy
+    url: jdbc:h2:tcp://localhost/~/study
     username: sa
 
 #  #MariaDB
@@ -24,7 +24,9 @@ spring:
   jpa:
     show-sql: true
     hibernate:
-      ddl-auto: update
+      ddl-auto: update #Entity 변경사항 있을시 ALTER DDL 실행
+#      ddl-auto: create-drop # 서버 동작시 Entity 삭제 및 생성 DDL 실행 (*주의 데이터 다날아감*)
+#      ddl-auto: none # 변화없음 테스트 DB인 H2이후 실제 개발 DB부터는 이거 적용
     properties:
       hibernate:
         dialect: org.hibernate.dialect.H2Dialect
@@ -41,5 +43,3 @@ logging:
     org.hibernate.type: trace
     com.zaxxer.hikari.HikariConfig: debug
     org.springframework.web: debug
-
-

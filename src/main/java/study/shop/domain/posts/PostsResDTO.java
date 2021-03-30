@@ -34,6 +34,8 @@ public class PostsResDTO {
         this.author = posts.getMember().getNickName();
         this.createDate = posts.getCreateDate().substring(0, posts.getCreateDate().indexOf("T"));
         this.postsViews = posts.getPostsViews();
-        this.postsFileList = posts.getPostsFileList().stream().map(o -> new PostsFileResDTO(o)).collect(Collectors.toList());
+        if (posts.getPostsFileList() != null) {
+            this.postsFileList = posts.getPostsFileList().stream().map(o -> new PostsFileResDTO(o)).collect(Collectors.toList());
+        }
     }
 }

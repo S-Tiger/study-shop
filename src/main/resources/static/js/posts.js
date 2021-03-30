@@ -14,6 +14,7 @@ var main = {
         });
     },
 
+    // 글저장
     save : function () {
         var data = {
             title: $('#title').val(),
@@ -35,6 +36,7 @@ var main = {
         });
     },
 
+    // 글수정
     update : function () {
         var data = {
             title: $('#title').val(),
@@ -56,6 +58,7 @@ var main = {
         });
     },
 
+    // 글삭제
     delete : function () {
         var id = $('#id').val();
 

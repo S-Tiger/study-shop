@@ -11,18 +11,21 @@ import study.shop.domain.posts.Posts;
 import javax.persistence.*;
 import java.util.List;
 
-@NoArgsConstructor
-@AllArgsConstructor
+@NoArgsConstructor // 기본 생성자
+@AllArgsConstructor // 모든변수 생성자
 @Getter
-@Builder
-@DynamicUpdate
-@Entity
+@Builder // Builder 어노테이션
+@DynamicUpdate // DynamicUpdate 지원 어노테이션
+@Entity // Entity선언 어노테이션
 @Table(name = "STUDY_MEMBER")
 public class Member extends BaseEntity {
 
-    @Id
-    @Column(name = "MEMBER_ID", length = 30, nullable = false)
-    private String id;
+    @Id // Id 선언 어노테이션
+    @GeneratedValue(strategy = GenerationType.IDENTITY) // IDENTITY = AutoIncrement, Auto = MySql계열(AUTOINCREMENT), Oracle계열(SEQUENCE)
+    private Long id;
+
+    @Column(length = 30, nullable = false, unique = true) // 컬럼속성 정하는 어노테이션
+    private String memberId;
 
     @Column(nullable = false)
     private String password;
@@ -35,7 +38,7 @@ public class Member extends BaseEntity {
 
     private String sex;
 
-    @Enumerated(EnumType.STRING) //Enum값을 어떤 형태로 저장할지 결졍 Default값은 int로 된 숫자
+    @Enumerated(EnumType.STRING) // Enum값을 어떤 형태로 저장할지 결졍 Default값은 int로 된 숫자
     @Column(nullable = false)
     private Role role;
 

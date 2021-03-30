@@ -29,7 +29,7 @@ public class Posts extends BaseEntity {
     @Column(length = 50, nullable = false)
     private String title;
 
-    @Column(columnDefinition = "TEXT", nullable = false) //타입을 TEXT로 변경하고 싶을경우
+    @Column(columnDefinition = "TEXT", nullable = false) // 타입을 TEXT로 변경하고 싶을경우
     private String content;
 
     private Long postsViews;

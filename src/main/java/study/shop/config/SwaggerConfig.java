@@ -15,8 +15,8 @@ import springfox.documentation.swagger2.annotations.EnableSwagger2;
 
 import java.util.ArrayList;
 
-@EnableSwagger2 //스웨거2사용 어노테이션
-@Configuration //config 파일에 사용하는 어노테이션
+@EnableSwagger2 // 어노테이션을 추가하여 Swagger2선언 어노테이션
+@Configuration // config 파일에 사용하는 어노테이션
 public class SwaggerConfig {
 
     @Bean
@@ -24,8 +24,8 @@ public class SwaggerConfig {
 
         return new Docket(DocumentationType.SWAGGER_2)
                 .select()
-                .apis(RequestHandlerSelectors.basePackage("study.shop.apicontroller")) //설정할 패키지설정 //any일경우 전부
-                .paths(PathSelectors.any()) //설정한 url들만 필터링 //any일경우 전부
+                .apis(RequestHandlerSelectors.basePackage("study.shop.apicontroller")) // 설정할 패키지설정, any 일경우 전부
+                .paths(PathSelectors.any()) // 설정한 url들만 필터링, any 일경우 전부
                 .build()
                 .apiInfo(apiInfo())
                 .useDefaultResponseMessages(false)
@@ -43,7 +43,7 @@ public class SwaggerConfig {
         return new ApiInfoBuilder()
                 .title("API 타이틀")
                 .description("API 상세소개 및 사용법")
-                .version("1.0") //현재배포버전전
+                .version("1.0") // 현재배포버전
                 .build();
     }
 

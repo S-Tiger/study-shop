@@ -18,7 +18,7 @@ import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
-@RequiredArgsConstructor //final이 선언된 Class를 주입
+@RequiredArgsConstructor // final이 선언된 Class를 주입
 public class PostsService {
 
     private final PostsRepository postsRepo;
@@ -31,7 +31,7 @@ public class PostsService {
      */
     @Transactional
     public PostsResDTO save(PostsReqDTO reqDTO){
-        Optional<Member> member = memberRepo.findById(reqDTO.getAuthor());
+        Optional<Member> member = memberRepo.findByMemberId(reqDTO.getAuthor());
 
         return new PostsResDTO(postsRepo.save(reqDTO.toEntity(member.get())));
     }

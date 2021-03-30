@@ -9,11 +9,11 @@ import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Pattern;
 
 @Data
-@NoArgsConstructor //기본 생성자
-@AllArgsConstructor //모든 변수 생성자
+@NoArgsConstructor // 기본 생성자
+@AllArgsConstructor // 모든 변수 생성자
 public class MemberReqDTO {
 
-    @ApiModelProperty(value = "회원ID", required = true)
+    @ApiModelProperty(value = "회원ID", required = true) // 스웨거 API 설명서 표시 어노테이션
     @NotBlank(message = "아이디는 필수 입력 값입니다.")
     private String memberId;
     //@NotBlank : null과 빈 공백 문자열 (" ")을 허용하지 않음
@@ -42,7 +42,7 @@ public class MemberReqDTO {
 
     public Member toEntity(){
         return  Member.builder()
-                .id(memberId)
+                .memberId(memberId)
                 .nickName(nickName)
                 .password(password)
                 .age(age)

@@ -6,12 +6,7 @@
 
 <th:block layout:fragment="content">
 
-    <h1 class="page-header">Hello Spring</h1>
-    <p>회원 기능</p>
-        <a sec:authorzize = "isAnonymous()" th:href="@{/member/login}">로그인</a>
-        <a sec:authorzize = "isAuthenticated()" th:href="@{/member/logout}">로그아웃</a>
-        <a sec:authorzize = "isAnonymous()" href="/member/save">회원 가입</a>
-        <a sec:authorzize = "hasRole('ROLE_MEMBER')" href="/member/list">회원 목록</a>
-
+    <h1 class="page-header">home</h1>
+    <div class="content">hi</div>
 </th:block>
 </html>
