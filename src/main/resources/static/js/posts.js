@@ -16,6 +16,10 @@ var main = {
 
     // 글저장
     save : function () {
+
+        var headerName = $("meta[name='_csrf_header']").attr("content");
+        var token = $("meta[name='_csrf']").attr("content");
+
         var data = {
             title: $('#title').val(),
             author: $('#author').val(),
@@ -25,6 +29,9 @@ var main = {
         $.ajax({
             type: 'POST',
             url: '/api/v1/posts',
+            beforeSend: function (xhr) {
+                xhr.setRequestHeader(headerName,token);
+            },
             dataType: 'json',
             contentType:'application/json; charset=utf-8',
             data: JSON.stringify(data)

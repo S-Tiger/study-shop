@@ -26,6 +26,17 @@ public class PostsApiController {
 
     private final PostsService postsService;
 
+    @ApiOperation(value = "게시글 목록", notes = "게시글을 목록을 조회 합니다.")
+    @ApiImplicitParams({
+            @ApiImplicitParam(name = "page", value = "페이지 번호", paramType = "query", dataType = "string", defaultValue = "1"),
+            @ApiImplicitParam(name = "size", value = "페이지 크기", paramType = "query", dataType = "string", defaultValue = "20"),
+            @ApiImplicitParam(name = "sort", value = "목록 정렬순서 (Property,asc 또는,desc 입력)", paramType = "query", dataType = "string", allowMultiple = true)
+    })
+    @GetMapping("/posts")
+    public Page<PostsResDTO> getList(HttpServletResponse res, HttpServletRequest req, @ApiIgnore Pageable pageable){
+        return postsService.getList(pageable);
+    }
+
     @ApiOperation(value = "게시글 등록", notes = "게시글을 등록 합니다.")
     @PostMapping("/posts")
     public PostsResDTO save(HttpServletResponse res, HttpServletRequest req, @RequestBody PostsReqDTO reqDTO){
@@ -36,17 +47,6 @@ public class PostsApiController {
     @GetMapping("/posts/{id}")
     public PostsResDTO get(HttpServletResponse res, HttpServletRequest req, @PathVariable Long id){
         return postsService.get(id);
-    }
-
-    @ApiOperation(value = "게시글 목록", notes = "게시글을 목록을 조회 합니다.")
-    @ApiImplicitParams({
-            @ApiImplicitParam(name = "page", value = "페이지 번호", paramType = "query", dataType = "string", defaultValue = "1"),
-            @ApiImplicitParam(name = "size", value = "페이지 크기", paramType = "query", dataType = "string", defaultValue = "20"),
-            @ApiImplicitParam(name = "sort", value = "목록 정렬순서 (Property,asc 또는,desc 입력)", paramType = "query", dataType = "string", allowMultiple = true)
-    })
-    @GetMapping("/posts")
-    public Page<PostsResDTO> getList(HttpServletResponse res, HttpServletRequest req, @ApiIgnore Pageable pageable){
-        return postsService.getList(pageable);
     }
 
     @ApiOperation(value = "게시글 수정", notes = "게시글을 수정 합니다.")

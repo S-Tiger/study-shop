@@ -73,25 +73,3 @@ function thousand(num) {
 	return Math.floor(num / 1000);
 }
 
-//첨부파일 체크
-$("#ex_filename").change(function(){
-	if($(this).val() != ""){
-		//확장자 체크
-		var ext = $(this).val().split(".").pop().toLowerCase();
-		if($.inArray(ext , ["xls","xlsx","ppt","pptx","txt","hwp","xml","jpg","png","gif",
-							"zip","pdf","doc","docx"]) == -1)	{
-			alert("가능한 확장자가 아닙니다, 업로드 파일을 확인해주세요");
-			$(this).val("");
-			return;
-		}
-		// 용량 체크
-		for (var i = 0; i < this.files.length; i++){
-			var fileSize = this.files[i].size;
-			var maxSize = 1024 * 1024 * 292;
-			if(fileSize > maxSize){
-				alert(this.files[i].name + "의 용량이 292MB을 초과 합니다." );
-				$(this).val("");
-			}
-		}
-	}
-})

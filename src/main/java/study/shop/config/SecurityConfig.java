@@ -35,12 +35,12 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Override // HttpSecurity는 http요청에 대한 웹 기반 보안을 구성성
     protected void configure(HttpSecurity http)throws Exception{
-        http.httpBasic().disable() // REST API사용하여 기본설정 사용 안함 (기본설정은 비인증시 로그인폼 화면으로 리다이렉트)
-                .csrf().disable(); // REST API이므로 csrf 보안이 필요 없음
+//        http.httpBasic().disable(); // REST API사용하여 기본설정 사용 안함 (기본설정은 비인증시 로그인폼 화면으로 리다이렉트)
+//        http.csrf().disable(); // REST API이므로 csrf 보안이 필요 없음
 //        // 페이지 권한 설정
         http.authorizeRequests()
                 .antMatchers("/**").permitAll()
-                .antMatchers("/member/myinfo","/posts/write").hasRole("MEMBER")
+                .antMatchers("/member/myinfo").hasRole("MEMBER")
                 .antMatchers("/admin/**").hasRole("ADMIN");
         // 로그인 설정
         http.formLogin()

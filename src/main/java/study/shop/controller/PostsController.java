@@ -13,7 +13,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import study.shop.domain.posts.PostsResDTO;
 import study.shop.service.PostsService;
+import study.shop.utils.CommonUtil;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
 import java.security.Principal;
 
 @RequiredArgsConstructor
@@ -44,7 +48,12 @@ public class PostsController {
 
     // 게시글 작성 페이지
     @GetMapping(value = "/write")
-    public String save(Principal user, Model model){
+    public String write(HttpServletRequest request, HttpServletResponse response, Principal user, Model model) throws IOException {
+        if (user == null){
+            CommonUtil.commonWriter(request,response,"/member/login","로그인후 이용해주세요");
+            return null;
+        }
+
         String userId = user.getName();
         model.addAttribute("userId", userId);
         return "/posts/write";
