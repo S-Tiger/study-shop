@@ -9,7 +9,7 @@ import study.shop.domain.member.Member;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class PostsReqDTO {
+public class PostsReqDto {
 
     @ApiModelProperty(value = "제목", required = true)
     private String title;

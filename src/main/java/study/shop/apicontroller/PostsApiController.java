@@ -10,8 +10,9 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.web.bind.annotation.*;
 import springfox.documentation.annotations.ApiIgnore;
-import study.shop.domain.posts.PostsReqDTO;
-import study.shop.domain.posts.PostsResDTO;
+import study.shop.domain.ApiResponseDto;
+import study.shop.domain.posts.PostsReqDto;
+import study.shop.domain.posts.PostsResDto;
 import study.shop.service.PostsService;
 
 import javax.servlet.http.HttpServletRequest;
@@ -33,31 +34,32 @@ public class PostsApiController {
             @ApiImplicitParam(name = "sort", value = "목록 정렬순서 (Property,asc 또는,desc 입력)", paramType = "query", dataType = "string", allowMultiple = true)
     })
     @GetMapping("/posts")
-    public Page<PostsResDTO> getList(HttpServletResponse res, HttpServletRequest req, @ApiIgnore Pageable pageable){
-        return postsService.getList(pageable);
+    public ApiResponseDto<Page<PostsResDto>> getList(@ApiIgnore Pageable pageable){
+
+        return ApiResponseDto.success(postsService.getList(pageable));
     }
 
     @ApiOperation(value = "게시글 등록", notes = "게시글을 등록 합니다.")
     @PostMapping("/posts")
-    public PostsResDTO save(HttpServletResponse res, HttpServletRequest req, @RequestBody PostsReqDTO reqDTO){
-        return postsService.save(reqDTO);
+    public PostsResDto save(@RequestBody PostsReqDto reqDto){
+        return postsService.save(reqDto);
     }
 
     @ApiOperation(value = "게시글 조회", notes = "게시글을 조회 합니다.")
     @GetMapping("/posts/{id}")
-    public PostsResDTO get(HttpServletResponse res, HttpServletRequest req, @PathVariable Long id){
+    public PostsResDto get(@PathVariable Long id){
         return postsService.get(id);
     }
 
     @ApiOperation(value = "게시글 수정", notes = "게시글을 수정 합니다.")
     @PutMapping("/posts/{id}")
-    public PostsResDTO delete(HttpServletResponse res, HttpServletRequest req, @PathVariable Long id, @RequestBody PostsReqDTO reqDTO){
-        return postsService.update(id, reqDTO);
+    public PostsResDto delete(@PathVariable Long id, @RequestBody PostsReqDto reqDto){
+        return postsService.update(id, reqDto);
     }
     
     @ApiOperation(value = "게시글 삭제", notes = "게시글을 삭제 합니다.")
     @DeleteMapping("/posts/{id}")
-    public void delete(HttpServletResponse res, HttpServletRequest req, @PathVariable Long id){
+    public void delete(@PathVariable Long id){
         postsService.delete(id);
     }
 }

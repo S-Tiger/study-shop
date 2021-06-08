@@ -45,6 +45,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         // 로그인 설정
         http.formLogin()
                     .loginPage("/member/login") // login경로로 접근하면 SpringSecurity에서 제공하는 From사용, 컨트롤러에 URL 매핑이 되어야한다.
+                    .loginProcessingUrl("/member/loginProcess") // login 페이지에 login form의 프로세스 Url
                     .defaultSuccessUrl("/member/login/result") // 로그인 성공시 이동되는 페이지, 컨트롤러에서 URL 매핑이 되어야한다.
                     .permitAll()
                     .usernameParameter("memberId"); // 로그인 form에서 아이디는 name=username인 input을 기본으로 인식하는데, 해당 메서드를 통해 파라미터명을 변경할 수 있다.

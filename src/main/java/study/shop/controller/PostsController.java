@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import study.shop.domain.posts.PostsResDTO;
+import study.shop.domain.posts.PostsResDto;
 import study.shop.service.PostsService;
 import study.shop.utils.CommonUtil;
 
@@ -33,7 +33,7 @@ public class PostsController {
                           @RequestParam(defaultValue = "10") int size,
                           @RequestParam(defaultValue = "id") String sort){
         Pageable pageable = PageRequest.of(page, size, Sort.Direction.DESC,sort);
-        Page<PostsResDTO> result = postsService.getList(pageable);
+        Page<PostsResDto> result = postsService.getList(pageable);
         model.addAttribute("posts", result);
         return "/posts/list";
     }
@@ -41,7 +41,7 @@ public class PostsController {
     // 게시글 상세조회 페이지
     @GetMapping(value = "/{id}")
     public String get(Model model, @PathVariable Long id){
-        PostsResDTO result = postsService.get(id);
+        PostsResDto result = postsService.get(id);
         model.addAttribute("posts", result);
         return "/posts/read";
     }
@@ -62,7 +62,7 @@ public class PostsController {
     // 게시글 수정 페이지
     @GetMapping(value = "/{id}/update")
     public String update(Model model, @PathVariable Long id){
-        PostsResDTO result = postsService.get(id);
+        PostsResDto result = postsService.get(id);
         model.addAttribute("posts", result);
         return "/posts/update";
     }

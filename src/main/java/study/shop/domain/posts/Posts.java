@@ -41,7 +41,7 @@ public class Posts extends BaseEntity {
     @JoinColumn(name = "MEMBER_ID")
     private Member member;
 
-    public Posts toUpdate(PostsReqDTO reqDTO){
+    public Posts toUpdate(PostsReqDto reqDTO){
         this.title = reqDTO.getTitle();
         this.content = reqDTO.getContent();
         return this;

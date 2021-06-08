@@ -11,7 +11,7 @@ import javax.validation.constraints.Pattern;
 @Data
 @NoArgsConstructor // 기본 생성자
 @AllArgsConstructor // 모든 변수 생성자
-public class MemberReqDTO {
+public class MemberReqDto {
 
     @ApiModelProperty(value = "회원ID", required = true) // 스웨거 API 설명서 표시 어노테이션
     @NotBlank(message = "아이디는 필수 입력 값입니다.")

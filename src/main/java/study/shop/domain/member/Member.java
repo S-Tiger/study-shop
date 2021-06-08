@@ -45,7 +45,7 @@ public class Member extends BaseEntity {
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "member", cascade = CascadeType.ALL)
     private List<Posts> postsList;
 
-    public Member toUpdate(MemberReqDTO dto){
+    public Member toUpdate(MemberReqDto dto){
         this.password = dto.getPassword();
         this.nickName = dto.getNickName();
         this.age = dto.getAge();

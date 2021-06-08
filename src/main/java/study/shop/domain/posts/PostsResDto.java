@@ -11,7 +11,7 @@ import java.util.stream.Collectors;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class PostsResDTO {
+public class PostsResDto {
 
     private Long no;
 
@@ -27,7 +27,7 @@ public class PostsResDTO {
 
     private List<PostsFileResDTO> postsFileList;
 
-    public PostsResDTO(Posts posts){
+    public PostsResDto(Posts posts){
         this.no = posts.getId();
         this.title = posts.getTitle();
         this.content = posts.getContent();

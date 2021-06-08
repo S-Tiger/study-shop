@@ -11,7 +11,7 @@ spring:
 
   #H2
   datasource:
-    url: jdbc:h2:tcp://localhost/~/study
+    url: jdbc:h2:tcp://localhost/~/test
     username: sa
 
 #  #MariaDB

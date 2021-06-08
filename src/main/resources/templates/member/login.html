@@ -7,7 +7,7 @@
 
     <h1 class="page-header">로그인</h1>
     <div>
-        <form method="post" action="/member/login">
+        <form method="post" action="/member/loginProcess">
             <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" />
 
             <div class="form-group">

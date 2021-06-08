@@ -25,7 +25,7 @@
                     <li><a sec:authorize = "isAnonymous()" th:href="@{/member/login}">로그인</a></li>
                     <li><a sec:authorize = "isAuthenticated()" th:href="@{/logout}">로그아웃</a></li>
                     <li><a sec:authorize="isAnonymous()" th:href="@{/member/signup}">회원가입</a>/li>
-                    <li><a sec:authorize="hasRole('ROLE_MEMBER')" th:href="@{/member/info}">내정보</a></li>
+                    <li><a sec:authorize="hasRole('ROLE_MEMBER')" th:href="@{/member/myInfo}">내정보</a></li>
                     <li><a sec:authorize="hasRole('ROLE_ADMIN')" th:href="@{/admin}">관리자</a></li>
                 </ul>
                 <form class="navbar-form navbar-right">

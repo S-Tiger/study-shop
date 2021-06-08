@@ -14,8 +14,8 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import study.shop.domain.member.Member;
-import study.shop.domain.member.MemberReqDTO;
-import study.shop.domain.member.MemberResDTO;
+import study.shop.domain.member.MemberReqDto;
+import study.shop.domain.member.MemberResDto;
 import study.shop.repository.MemberRepository;
 
 import java.util.ArrayList;
@@ -30,24 +30,14 @@ public class MemberService implements UserDetailsService {
 
     /**
      * 회원정보 저장
-     * @param reqDTO
+     * @param reqDto
      */
     @Transactional
-    public void joinUser(MemberReqDTO reqDTO){
-        memberRepo.findByMemberId(reqDTO.getMemberId()).ifPresent(m -> {throw new IllegalStateException("이미 존재하는 회원입니다."); });
+    public void joinUser(MemberReqDto reqDto){
+        memberRepo.findByMemberId(reqDto.getMemberId()).ifPresent(m -> {throw new IllegalStateException("이미 존재하는 회원입니다."); });
         BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
-        reqDTO.setPassword(passwordEncoder.encode(reqDTO.getPassword()));
-        memberRepo.save(reqDTO.toEntity());
-    }
-
-    /**
-     * 회원정보 조회
-     * @param memberId
-     * @return
-     */
-    public MemberResDTO get(String memberId){
-        Member member = memberRepo.findById(memberId).orElseThrow(() -> new IllegalArgumentException("해당 데이터가 존재하지 않습니다."));
-        return new MemberResDTO(member);
+        reqDto.setPassword(passwordEncoder.encode(reqDto.getPassword()));
+        memberRepo.save(reqDto.toEntity());
     }
 
     /**
@@ -56,12 +46,12 @@ public class MemberService implements UserDetailsService {
      * @return
      */
     @Transactional(readOnly = true) //트랜잭션 범위는 유지하되 조회 속도가 개선
-    public Page<MemberResDTO> getList(Pageable pageable){
+    public Page<MemberResDto> getList(Pageable pageable){
         Page<Member> memberList = memberRepo.findAll(pageable);
         if (memberList.isEmpty()){
             new IllegalArgumentException("해당 데이터가 존재하지 않습니다.");
         }
-        List<MemberResDTO> result = memberList.stream().map(o -> new MemberResDTO(o)).collect(Collectors.toList());
+        List<MemberResDto> result = memberList.stream().map(o -> new MemberResDto(o)).collect(Collectors.toList());
         return new PageImpl<>(result, pageable, memberList.getTotalElements());
     }
 
@@ -72,9 +62,9 @@ public class MemberService implements UserDetailsService {
      * @return
      */
     @Transactional
-    public MemberResDTO update(String memberId, MemberReqDTO reqDTO){
+    public MemberResDto update(String memberId, MemberReqDto reqDTO){
         Member member = memberRepo.findById(memberId).orElseThrow(() -> new IllegalArgumentException("해당 데이터가 존재하지 않습니다."));
-        return new MemberResDTO(member.toUpdate(reqDTO));
+        return new MemberResDto(member.toUpdate(reqDTO));
     }
 
     /**
@@ -100,5 +90,16 @@ public class MemberService implements UserDetailsService {
 
         authorities.add(new SimpleGrantedAuthority(member.getRoleValue()));
         return new User(member.getMemberId(), member.getPassword(), authorities);
+    }
+
+    /**
+     * 회원 아이디로 회원정보 검색
+     * @param memberId
+     * @return
+     */
+    public MemberResDto findByMemberId(String memberId) {
+        Member member = memberRepo.findByMemberId(memberId).orElseThrow(() ->  new IllegalArgumentException("해당 데이터가 존재하지 않습니다."));
+        MemberResDto ResDTO = new MemberResDto(member);
+        return ResDTO;
     }
 }

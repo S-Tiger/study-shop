@@ -7,7 +7,7 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor //기본 생성자
 @AllArgsConstructor //모든변수 생성자
-public class MemberResDTO {
+public class MemberResDto {
 
     private String memberId;
 
@@ -21,13 +21,16 @@ public class MemberResDTO {
 
     private String authority;
 
-    public MemberResDTO(Member member){
+    private String createDate;
+
+    public MemberResDto(Member member){
         this.memberId = member.getMemberId();
         this.password = member.getPassword();
         this.nickName = member.getNickName();
         this.age = member.getAge();
         this.sex = member.getSex();
         this.authority = member.getRoleValue();
+        this.createDate = member.getCreateDate();
     }
 
 }

@@ -8,8 +8,8 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import study.shop.domain.member.Member;
 import study.shop.domain.posts.Posts;
-import study.shop.domain.posts.PostsReqDTO;
-import study.shop.domain.posts.PostsResDTO;
+import study.shop.domain.posts.PostsReqDto;
+import study.shop.domain.posts.PostsResDto;
 import study.shop.repository.MemberRepository;
 import study.shop.repository.PostsRepository;
 
@@ -26,14 +26,14 @@ public class PostsService {
 
     /**
      * 게시글 작성
-     * @param reqDTO
+     * @param reqDto
      * @return
      */
     @Transactional
-    public PostsResDTO save(PostsReqDTO reqDTO){
-        Optional<Member> member = memberRepo.findByMemberId(reqDTO.getAuthor());
+    public PostsResDto save(PostsReqDto reqDto){
+        Optional<Member> member = memberRepo.findByMemberId(reqDto.getAuthor());
 
-        return new PostsResDTO(postsRepo.save(reqDTO.toEntity(member.get())));
+        return new PostsResDto(postsRepo.save(reqDto.toEntity(member.get())));
     }
 
     /**
@@ -42,9 +42,9 @@ public class PostsService {
      * @return
      */
     @Transactional(readOnly = true)
-    public PostsResDTO get(Long id){
+    public PostsResDto get(Long id){
         Posts posts = postsRepo.findById(id).orElseThrow(() -> new IllegalArgumentException("해당 데이터가 존재하지 않습니다."));
-        return new PostsResDTO(posts);
+        return new PostsResDto(posts);
     }
 
     /**
@@ -53,25 +53,25 @@ public class PostsService {
      * @return
      */
     @Transactional(readOnly = true) //트랜잭션 범위는 유지하되 조회 속도가 개선
-    public Page<PostsResDTO> getList(Pageable pageable){
+    public Page<PostsResDto> getList(Pageable pageable){
         Page<Posts> postsList = postsRepo.findAll(pageable);
         if (postsList.isEmpty()){
             new IllegalArgumentException("해당 데이터가 존재하지 않습니다.");
         }
-        List<PostsResDTO> result = postsList.stream().map(o -> new PostsResDTO(o)).collect(Collectors.toList());
+        List<PostsResDto> result = postsList.stream().map(o -> new PostsResDto(o)).collect(Collectors.toList());
         return new PageImpl<>(result, pageable, postsList.getTotalElements());
     }
 
     /**
      * 게시글 수정
      * @param id
-     * @param reqDTO
+     * @param reqDto
      * @return
      */
     @Transactional
-    public PostsResDTO update(Long id, PostsReqDTO reqDTO){
+    public PostsResDto update(Long id, PostsReqDto reqDto){
         Posts posts = postsRepo.findById(id).orElseThrow(() -> new IllegalArgumentException("해당 데이터가 존재하지 않습니다."+ id));
-        return new PostsResDTO(posts.toUpdate(reqDTO));
+        return new PostsResDto(posts.toUpdate(reqDto));
     }
 
     /**
